@@ -14,4 +14,12 @@ class PowerGenerator < ApplicationRecord
     trapezoidal
   ]
 
+  scope :recommenda, lambda { |manufacturer, structure_type|
+    relationship = all
+    unless structure_type.nil?
+      relationship = relationship.where(structure_type: structure_type)
+    end
+    relationship
+  }
+
 end
