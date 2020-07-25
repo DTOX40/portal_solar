@@ -20,9 +20,12 @@
          <dd><%= number_to_currency(@power_generator.price, unit: "R$ ", precision: 2, :separator => ",", :delimiter => ".") %></dd>
          <dt><dfn>Comprimento:</dfn></dt>
          <dd><%= pluralize(@power_generator.lenght, 'metro', 'metros') %></dd>
-         <dt><dfn></dfn></dt>
+         <dt><dfn>Peso</dfn></dt>
          <dd><%= pluralize(@power_generator.weight, 'kg', 'kgs') %></dd>
        </dl>
+
+        <%= render partial: 'freight_cost', locals: { address: @address} %>
+        
      </div>
    </div>
   </div>

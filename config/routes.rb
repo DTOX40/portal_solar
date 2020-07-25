@@ -1,10 +1,7 @@
 Rails.application.routes.draw do
-
-  get 'recommenda', controller: :power_generators
-
   root to: 'power_generators#index'
-  
-  resources :home, only: %i[index]
-  resources :power_generators, only: %i[index]
-  resources :power_generators, only: %i[show]
+  resources :power_generators, only: %i[index show] do
+    get 'recommenda', on: :collection
+    get 'freight_cost', on: :member
+  end
 end
