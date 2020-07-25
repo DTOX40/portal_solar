@@ -22,18 +22,21 @@
           <input class="form-control form-control-lg" type="text" placeholder="o que procura?">
         </div>
         <div class="simple-form__btn">
-          <button type="submit">Busacar</button>
+          <button type="submit">Buscar</button>
         </div>
       </div>
     <% end %>
 
       <div class="advanced-form" style="display:none;">
         <%= form_with url: recommenda_path, local: true, method: 'get' do |f| %>
+          <label>Escolha alguns dos filtros abaixo para que possamos te recomendar alguns de nossos produtos.</label>
+          <br>
+          <br>
           <%= f.label :manufacturer, 'Fornecedores' %>
           <%= f.select(:manufacturer, PowerGenerator.all.map { |power_gen| power_gen.manufacturer }.uniq) %>
           <%= f.label :structure_type, 'Tipos de Estrutura para Paineis Solar' %>
           <%= f.select(:structure_type, PowerGenerator.structure_types.map { |key, _t| key }) %>
-          <%= f.submit 'Ver Recomendações' %>
+          <%= f.submit 'Recomendações' %>
         <% end %>
       </div>
     <div class="btn">
@@ -46,7 +49,7 @@
       <div class="box card power_generator-card">
         <%= image_tag power_generator.image_url, class: 'power_generator-card__img' %>
         <div class="power_generator-card__body">
-          <h2><%= power_generator.name.upcase %></h2>
+          <h2><%= link_to power_generator.name.upcase, power_generator_path(power_generator)  %></h2>
           <p class="power_generator-card__price"><%= number_to_currency(power_generator.price, unit: "R$ ", precision: 2, :separator => ",", :delimiter => ".") %></p>
           <p><strong>Descrição: </strong><%= power_generator.description %></p>
         </div>

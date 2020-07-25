@@ -1,0 +1,29 @@
+<div>
+  <div class="header">
+    <div class="logo"><%= image_tag 'ps_logo.png' %></div>
+    <div class="header__title">Geradores de Energia</div>
+  </div>
+
+  <div class="searcher gradient", style="padding: 1rem 0 1rem 1rem">
+    <%= link_to 'Voltar', power_generators_path %>
+  </div>
+
+  <h1 class="power_generators-list"><%= @power_generator.name.upcase %></h1>
+  <div class="container">
+   <div class="row">
+     <div class="colun">
+        <%= image_tag @power_generator.image_url %>
+     </div>
+     <div class="colun">
+       <dl>
+         <dt><dfn>Valor do produto:</dfn></dt>
+         <dd><%= number_to_currency(@power_generator.price, unit: "R$ ", precision: 2, :separator => ",", :delimiter => ".") %></dd>
+         <dt><dfn>Comprimento:</dfn></dt>
+         <dd><%= pluralize(@power_generator.lenght, 'metro', 'metros') %></dd>
+         <dt><dfn></dfn></dt>
+         <dd><%= pluralize(@power_generator.weight, 'kg', 'kgs') %></dd>
+       </dl>
+     </div>
+   </div>
+  </div>
+</div>

@@ -5,6 +5,10 @@ class PowerGeneratorsController < ApplicationController
     @power_generators = PowerGenerator.all
   end
 
+  def show
+    @power_generator = PowerGenerator.find(params[:id])
+  end
+
   def recommenda
     @power_generators = PowerGenerator.recommenda(@manufacturer, @structure_type)
       if @power_generators.empty?
@@ -18,7 +22,7 @@ class PowerGeneratorsController < ApplicationController
   def recomeda_params
     manufacturer = params[:manufacturer]
     structure_type = params[:structure_type]
-
+    
     @manufacturer = manufacturer unless manufacturer.empty?
     @structure_type = structure_type unless structure_type.empty?
   end
