@@ -15,6 +15,7 @@ gem 'jquery-rails'
 gem 'uglifier', '>= 1.3.0'
 gem "roo", "~> 2.8.0"
 
+gem 'pg_search'
 
 source "https://rails-assets.org" do
   gem "rails-assets-jquery"
