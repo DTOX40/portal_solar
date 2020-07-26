@@ -26,4 +26,6 @@ class PowerGenerator < ApplicationRecord
     height * lenght * width * 300
   end
 
+  scope :search, ->(query) { where('name ilike ?', "%#{query}%") }
+
 end

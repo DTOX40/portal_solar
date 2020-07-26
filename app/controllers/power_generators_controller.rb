@@ -22,6 +22,11 @@ class PowerGeneratorsController < ApplicationController
     end
   end
 
+  def search
+    @power_generators = PowerGenerator.search(params[:q])
+    render :index
+  end
+
   def recommenda
     @power_generators = PowerGenerator.recommenda(@manufacturer, @structure_type)
       if @power_generators.empty?

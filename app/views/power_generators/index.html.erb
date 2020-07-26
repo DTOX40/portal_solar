@@ -16,13 +16,14 @@
       </div>
     </div>
 
-    <%= form_tag do %>
+    
+    <%= form_with url: search_power_generators_path, method: :get, local: true do |f| %>
       <div class="simple-form">
         <div class="simple-form__input">
-          <input class="form-control form-control-lg" type="text" placeholder="o que procura?">
+          <%= f.search_field :q, class: "form-control form-control-lg", placeholder: "o que procura?"%>
         </div>
         <div class="simple-form__btn">
-          <button type="submit">Buscar</button>
+          <%= f.submit 'Pesquisar', class: "btn btn-outline-primary btn-lg"%>
         </div>
       </div>
     <% end %>
@@ -56,5 +57,16 @@
         </div>
       </div>
     <% end %>
+
+    <% if @power_generators.empty? %>
+      <div class="products-highlights">
+        <div class="not-found">
+          <h1><span>Desculpe. Não temos resultados para o termo pesquisado.</span></h1>
+          <a class="btn btn-primary">
+            <%= link_to "Voltar para a página inicial", root_path %>
+          </a>
+        </div>
+    <% end %>
+
   </div>
 </div>
