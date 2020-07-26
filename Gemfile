@@ -17,6 +17,8 @@ gem "roo", "~> 2.8.0"
 
 gem 'pg_search'
 gem 'simple_form'
+gem 'will_paginate', '~> 3.1.0'
+gem 'will_paginate-bootstrap'
 
 source "https://rails-assets.org" do
   gem "rails-assets-jquery"

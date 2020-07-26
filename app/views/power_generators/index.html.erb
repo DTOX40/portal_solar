@@ -45,6 +45,12 @@
     </div>
   </div>
 
+  <div style="margin-left: 1rem">
+  <%= form_with url: power_generators_path, local:true, method: 'get' do %>
+    <%= select_tag(:options, options_for_select([['Selecionar', nil], ['Preco', :price], ['KWP', :kwp]])) %>
+    <%= submit_tag 'Filtrar' %>
+  <% end %>
+
   <div class="container" >
     <% @power_generators.each do |power_generator| %>
       <div class="box card power_generator-card">
@@ -61,12 +67,13 @@
     <% if @power_generators.empty? %>
       <div class="products-highlights">
         <div class="not-found">
-          <h1><span>Desculpe. Não temos resultados para o termo pesquisado.</span></h1>
+          <h1><span>Desculpe não temos resultados para a sua pesquisa.</span></h1>
           <a class="btn btn-primary">
-            <%= link_to "Voltar para a página inicial", root_path %>
+            <%= link_to "página inicial", root_path %>
           </a>
         </div>
     <% end %>
-
+      <br>
+      <%= will_paginate @power_generators %> 
   </div>
 </div>
