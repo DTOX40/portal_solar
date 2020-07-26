@@ -20,10 +20,10 @@
     <%= form_with url: search_power_generators_path, method: :get, local: true do |f| %>
       <div class="simple-form">
         <div class="simple-form__input">
-          <%= f.search_field :q, class: "form-control form-control-lg", placeholder: "o que procura?"%>
+          <%= f.search_field :q, class: "form-control form-control-lg", placeholder: "Digite sua busca?"%>
         </div>
         <div class="simple-form__btn">
-          <%= f.submit 'Pesquisar', class: "btn btn-outline-primary btn-lg"%>
+          <%= f.submit 'Buscar', class: "btn btn-outline-primary btn-lg"%>
         </div>
       </div>
     <% end %>
@@ -36,7 +36,7 @@
           <%= f.label :manufacturer, 'Fornecedores' %>
           <%= f.select(:manufacturer, PowerGenerator.all.map { |power_gen| power_gen.manufacturer }.uniq) %>
           <%= f.label :structure_type, 'Tipos de Estrutura para Paineis Solar' %>
-          <%= f.select(:structure_type, PowerGenerator.structure_types.map { |key, _t| key }) %>
+          <%= f.select(:structure_type, PowerGenerator.structure_types.map { |key, _v| key }) %>
           <%= f.submit 'Recomendações' %>
         <% end %>
       </div>
@@ -47,7 +47,7 @@
 
   <div style="margin-left: 1rem">
   <%= form_with url: power_generators_path, local:true, method: 'get' do %>
-    <%= select_tag(:options, options_for_select([['Selecionar', nil], ['Preco', :price], ['KWP', :kwp]])) %>
+    <%= select_tag(:options, options_for_select([['Selecionar', nil], ['Menor preco', :price], ['KWP', :kwp]])) %>
     <%= submit_tag 'Filtrar' %>
   <% end %>
 
@@ -67,7 +67,7 @@
     <% if @power_generators.empty? %>
       <div class="products-highlights">
         <div class="not-found">
-          <h1><span>Desculpe não temos resultados para a sua pesquisa.</span></h1>
+          <h1><span>Desculpe não temos resultados para a sua busca.</span></h1>
           <a class="btn btn-primary">
             <%= link_to "página inicial", root_path %>
           </a>

@@ -10,15 +10,15 @@ class PowerGenerator < ApplicationRecord
   enum structure_type: { metalico: 0, ceramico: 1, fibrocimento: 2,
                          laje: 3, solo: 4, trapezoidal: 5 }
 
-  pg_search_scope :simple_search, against: %i[name description
+  pg_search_scope :search, against: %i[name description
                                               manufacturer price]
 
-  scope :recommenda, lambda { |manufacturer, structure_type|
-    relationship = all
-    unless structure_type.nil?
-      relationship = relationship.where(structure_type: structure_type)
-    end
-    relationship
+  scope :recommenda, lambda { |price, manufacturer, structure_type|
+  relationship = all
+  unless structure_type.nil?
+    relationship = relationship.where(structure_type: structure_type)
+  end
+  relationship
   }
 
   def cubic_weight
