@@ -1,4 +1,4 @@
-# require 'open-uri'
+require 'open-uri'
 
 class PowerGeneratorsController < ApplicationController
   before_action :recomeda_params, only: [:recommenda]
