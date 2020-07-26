@@ -5,6 +5,10 @@ class PowerGeneratorsController < ApplicationController
 
   def index
     @power_generators = PowerGenerator.all
+
+    @power_generators_total = @power_generators
+    options = {page: params[:page] || 1, per_page: 6}
+    @power_generators = @power_generators.paginate(options)
   end
 
   def show
@@ -23,25 +27,16 @@ class PowerGeneratorsController < ApplicationController
   end
 
   def search
-    @power_generators = PowerGenerator.search(params[:q])
+    @power_generators = PowerGenerator.search(params[:q]).page(params[:page])
     render :index
   end
 
   def recommenda
-    @power_generators = PowerGenerator.recommenda(@manufacturer, @structure_type)
+    @power_generators = PowerGenerator.recommenda(@manufacturer, @structure_type).page(params[:page])
       if @power_generators.empty?
     end
 
     render :index
-  end
-
-  def freight_cost
-    @power_generator = PowerGenerator.find(params[:id])
-    @address = AddressFinder.new(params[:cep]).address
-    unless @address[:erro] == true
-      @cost = Freight.cost_calculate(@power_generator.weight, @address[:uf])
-    end
-      render :show
   end
 
   private
