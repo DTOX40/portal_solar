@@ -22,4 +22,8 @@ class PowerGenerator < ApplicationRecord
     relationship
   }
 
+  def cubic_weight
+    height * lenght * width * 300
+  end
+
 end

@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class PowerGeneratorsController < ApplicationController
   before_action :recomeda_params, only: [:recommenda]
 
@@ -7,6 +9,17 @@ class PowerGeneratorsController < ApplicationController
 
   def show
     @power_generator = PowerGenerator.find(params[:id])
+    @zip = params[:zip_code]
+    if @zip
+      @zip_value = @zip[:code]
+      url = "http://apps.widenet.com.br/busca-cep/api/cep/#{@zip_value.first(5)}-#{@zip_value.last(3)}.json"
+      address = open(url).read
+      @address = JSON.parse(address)
+
+      @freights = Freight.address_state(@address)
+    else
+      @freights = []
+    end
   end
 
   def recommenda
