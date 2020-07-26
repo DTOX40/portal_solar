@@ -4,29 +4,44 @@
     <div class="header__title">Geradores de Energia</div>
   </div>
 
-  <div class="searcher gradient", style="padding: 1rem 0 1rem 1rem">
-    <%= link_to 'Voltar', power_generators_path %>
-  </div>
+  <div class="searcher gradient">
+    <div class="searcher__radio">
+          <div class="form-check">
+        <br>
+        <br>
+        <%= link_to 'Voltar', power_generators_path %>
+        <br>
+        <br>
+        <br>
 
-  <h1 class="power_generators-list"><%= @power_generator.name.upcase %></h1>
-  <div class="container">
-   <div class="row">
-     <div class="colun">
-        <%= image_tag @power_generator.image_url %>
-     </div>
-     <div class="colun">
-       <dl>
-         <dt><dfn>Valor do produto:</dfn></dt>
-         <dd><%= number_to_currency(@power_generator.price, unit: "R$ ", precision: 2, :separator => ",", :delimiter => ".") %></dd>
-         <dt><dfn>Comprimento:</dfn></dt>
-         <dd><%= pluralize(@power_generator.lenght, 'metro', 'metros') %></dd>
-         <dt><dfn>Peso</dfn></dt>
-         <dd><%= pluralize(@power_generator.weight, 'kg', 'kgs') %></dd>
-       </dl>
-
-        <%= render partial: 'freight_cost', locals: { address: @address} %>
-        
-     </div>
-   </div>
-  </div>
+      </div>
+    </div>
 </div>
+
+<div>
+  <%= image_tag @power_generator.image_url, class: 'power_generator-card__img' %>
+  <div class="power_generator-card__body">
+    <h2><%= @power_generator.name.upcase %></h2>
+    <p class="power_generator-card__price"><%= number_to_currency(@power_generator.price, unit: "R$ ", precision: 2, :separator => ",", :delimiter => ".") %></p>
+    <div class="column">
+       <dl>
+         <dt><dfn>Descrição:</dfn></dt>
+         <dd><%= @power_generator.description %></dd>
+         <dt><dfn>Peso / Peso Cubado</dfn></dt>
+         <dd><%= pluralize(@power_generator.weight, 'kg', 'kgs') %> / <%= pluralize(number_with_precision(@power_generator.cubic_weight, precision: 1), 'kg', 'kgs') %></dd>
+         <dt><dfn>Estrutura de fixação para o Painel Solar:</dfn></dt>
+         <dd><%= @power_generator.structure_type.capitalize %></dd>
+       </dl>
+    <%=  simple_form_for :zip_code, url: power_generator_path, method: :get, html: { class: "form_inline" } do |f| %>
+      <%= f.input_field :code, label: "", placeholder: "CEP (00000000)" %>
+      <%= f.submit "Calcular frete", class: "btn btn-primary" %>
+    <% end %>
+    <div>
+      <% @freights.each do |freight| %>
+        <% if (freight.weight_min <= @power_generator.weight) && (freight.weight_max >= @power_generator.weight) %>
+          <p class='power_generator-card__price'><strong>Custo:</strong> R$<%= freight.cost.round(2)%></p>
+          <% break %>
+        <% end %>
+      <% end %>
+    </div>
+  </div> 

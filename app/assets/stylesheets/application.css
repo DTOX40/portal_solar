@@ -13,6 +13,9 @@
  *= require_tree .
  *= require_self
  */
+ @import "bootstrap/scss/bootstrap";
+
+ 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
