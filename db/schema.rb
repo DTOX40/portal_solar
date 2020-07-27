@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2019_09_02_225339) do
     t.float "kwp"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "cubic_weight"
   end
 
 end
