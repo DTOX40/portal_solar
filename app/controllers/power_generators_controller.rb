@@ -29,7 +29,6 @@ class PowerGeneratorsController < ApplicationController
   def search
     @power_generators = PowerGenerator.search(params[:q]).page(params[:page])
     if @power_generators.blank?
-      flash[:notice] = 'Não há nada correspondente a sua pesquisa.'
     end
     render :index
   end
@@ -37,7 +36,6 @@ class PowerGeneratorsController < ApplicationController
   def recommenda
     @power_generators = PowerGenerator.recommenda(@price, @manufacturer, @structure_type).page(params[:page])
     if @power_generators.empty?
-      flash[:notice] = 'Não há nada correspondente a sua pesquisa.'
       return render :index
     end
 

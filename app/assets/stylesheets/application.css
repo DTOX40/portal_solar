@@ -140,17 +140,16 @@ p.power_generator-card__price {
 .power_generator-card__body {
   margin-left: 26px;
   margin-right: 130px;
+  border-radius: 1px solid red;
 }
 
 .power_generator-card__button {
   color: #e96443;
 }
 
-/**********/
-.colun {
-  float: left;
-  width: 50%;
-  margin-left: -70px;
+.column {
+  max-width: 500px;
+  font-size: 14px;
 }
 
 .row:after {
@@ -159,8 +158,9 @@ p.power_generator-card__price {
     content: "";
 }
 
+
 @media screen and (max-width: 1400px) {
-    .colun {
+    .column {
         width: 100%;
     }
 }
