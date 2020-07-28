@@ -36,8 +36,7 @@ class PowerGeneratorsController < ApplicationController
   def recommenda
     @power_generators = PowerGenerator.recommenda(@price, @manufacturer, @structure_type).page(params[:page])
     if @power_generators.empty?
-      return render :index
-    end
+      end
 
     render :index
   end
