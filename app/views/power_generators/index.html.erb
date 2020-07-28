@@ -3,7 +3,6 @@
     <div class="logo"><%= image_tag 'ps_logo.png' %></div>
     <div class="header__title">Geradores de Energia</div>
   </div>
-
   <div class="searcher gradient">
     <div class="searcher__radio">
       <div class="form-check">
@@ -15,8 +14,6 @@
         <label class="form-check-label" for="advancedSearch">Pesquisa Avançada</label>
       </div>
     </div>
-
-    
     <%= form_with url: search_power_generators_path, method: :get, local: true do |f| %>
       <div class="simple-form">
         <div class="simple-form__input">
@@ -27,7 +24,6 @@
         </div>
       </div>
     <% end %>
-
       <div class="advanced-form" style="display:none;">
         <%= form_with url: recommenda_power_generators_path, local: true, method: 'get' do |f| %>
           <label>Escolha alguns dos filtros abaixo para que possamos te recomendar alguns de nossos produtos.</label>
@@ -43,13 +39,11 @@
     <div class="btn">
     </div>
   </div>
-
   <div style="margin-left: 1rem">
   <%= form_with url: power_generators_path, local:true, method: 'get' do %>
     <%= select_tag(:options, options_for_select([['Selecionar', nil], ['Menor preco', :price], ['KWP', :kwp]])) %>
     <%= submit_tag 'Filtrar' %>
   <% end %>
-
   <div class="container" >
     <% @power_generators.each do |power_generator| %>
       <div class="box card power_generator-card">
@@ -62,7 +56,6 @@
         </div>
       </div>
     <% end %>
-
     <% if @power_generators.empty? %>
       <div class="products-highlights">
         <div class="not-found">
